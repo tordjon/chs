@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 import chess
-import pwd
+#import pwd
 import os
 
 from chs.client.ending import GameOver
@@ -183,7 +184,7 @@ class Board(object):
 
   def get_user(self, is_computer=False):
     title = '{}BOT {}'.format(Colors.ORANGE, Colors.RESET) if is_computer else ''
-    name = 'stockfish {}'.format(self._level) if is_computer else pwd.getpwuid(os.getuid()).pw_name
+    name = 'stockfish {}'.format(self._level) if is_computer else "pwd.getpwuid(os.getuid()).pw_name"
     return '{}● {}{}{}{}'.format(Colors.DULL_GREEN, title, Colors.LIGHT, name, Colors.RESET)
 
   def get_bar_section(self, rank):
@@ -303,30 +304,45 @@ class Board(object):
   def get_piece_colored(self, letter, is_black_check, is_white_check):
     black_king_color = Colors.Backgrounds.RED if is_black_check else Colors.DARK
     white_king_color = Colors.Backgrounds.RED if is_white_check else Colors.LIGHT
+    '''R': [Colors.LIGHT + '♜ ' + Colors.RESET],
+          'N': [Colors.LIGHT + '♞ ' + Colors.RESET],
+          'B': [Colors.LIGHT + '♗ ' + Colors.RESET],
+          'Q': [Colors.LIGHT + '♕ ' + Colors.RESET],
+          'K': [white_king_color + '♔ ' + Colors.RESET],
+          'P': [Colors.LIGHT + '♙ ' + Colors.RESET],
+          # Black
+          'r': [Colors.DARK + '♜ ' + Colors.RESET],
+          'n': [Colors.DARK + '♞ ' + Colors.RESET],
+          'b': [Colors.DARK + '♝ ' + Colors.RESET],
+          'q': [Colors.DARK + '♛ ' + Colors.RESET],
+          'k': [black_king_color + '♚ ' + Colors.RESET],
+          'p': [Colors.DARK + '♙ ' + Colors.RESET],'''
     pieces = {
       # White
-      'R': [Colors.LIGHT + '♜ ' + Colors.RESET],
-      'N': [Colors.LIGHT + '♞ ' + Colors.RESET],
-      'B': [Colors.LIGHT + '♗ ' + Colors.RESET],
-      'Q': [Colors.LIGHT + '♕ ' + Colors.RESET],
-      'K': [white_king_color + '♔ ' + Colors.RESET],
-      'P': [Colors.LIGHT + '♙ ' + Colors.RESET],
+      'R': [Colors.LIGHT + 'R ' + Colors.RESET],
+      'N': [Colors.LIGHT + 'N ' + Colors.RESET],
+      'B': [Colors.LIGHT + 'B ' + Colors.RESET],
+      'Q': [Colors.LIGHT + 'Q ' + Colors.RESET],
+      'K': [white_king_color + 'K ' + Colors.RESET],
+      'P': [Colors.LIGHT + 'P ' + Colors.RESET],
       # Black
-      'r': [Colors.DARK + '♜ ' + Colors.RESET],
-      'n': [Colors.DARK + '♞ ' + Colors.RESET],
-      'b': [Colors.DARK + '♝ ' + Colors.RESET],
-      'q': [Colors.DARK + '♛ ' + Colors.RESET],
-      'k': [black_king_color + '♚ ' + Colors.RESET],
-      'p': [Colors.DARK + '♙ ' + Colors.RESET],
+      'r': [Colors.DARK + 'r ' + Colors.RESET],
+      'n': [Colors.DARK + 'n ' + Colors.RESET],
+      'b': [Colors.DARK + 'b ' + Colors.RESET],
+      'q': [Colors.DARK + 'q ' + Colors.RESET],
+      'k': [black_king_color + 'k ' + Colors.RESET],
+      'p': [Colors.DARK + 'p ' + Colors.RESET],
       '1': ['  '],
       '2': ['  ', '  '],
       '3': ['  ', '  ', '  '],
       '4': ['  ', '  ', '  ', '  '],
       '5': ['  ', '  ', '  ', '  ', '  '],
-      '6': ['  ', '  ', '  ', '  ', '  ', '  '],
+      '6': ['  ', '  ',   '  ', '  ', '  ', '  '],
       '7': ['  ', '  ', '  ', '  ', '  ', '  ', '  '],
       '8': ['  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ']
     }
+
+    #return pieces.get(letter) if letter.isnumeric() else letter
     return pieces.get(letter)
 
   def get_coordinates_from_rank_file(self, r, f):
